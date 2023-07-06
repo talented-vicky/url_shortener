@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 
 dotenv.config();
 
-import scissorsRoute from './routes/scissorsRoutes.js';
+const shortRoute = require('./routes/shortener')
 
 const app = express()
 
@@ -15,10 +15,10 @@ app.set('views', 'views')
 
 app.use(express.static(path.join(__dirname, 'public/')))
 
-app.use(bodyParser.json({ limit: "30mb", extended: true })) //limit, as images will be passed to our app
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })) //setting up bodyparser to send requests
+app.use(bodyParser.json({ limit: "30mb", extended: true }))
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 
-app.use('/scissors', scissorsRoute);
+app.use(shortRoute);
 
 const PORT = process.env.PORT;
 const CONNECTION_URL = process.env.CONNECTION_URL;
