@@ -1,11 +1,17 @@
-
 .form {
-    width: 15rem;
-    height: 15rem;
-    margin: 5rem auto;
-    background-color: blanchedalmond;
+    width: 30rem;
+    height: 25rem;
+    margin: 10rem auto;
+    background-color: grey;
     border-radius: .5rem;
     padding: 1rem 2rem;
+}
+.header {
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: .3rem;
+    margin-bottom: 3rem;
 }
 .form_holder {
     color: grey;
@@ -15,16 +21,18 @@
 }
 .form_holder label {
     font-size: 1.1rem;
+    font-family: 'Courier New', Courier, monospace;
     margin-bottom: .4rem;
+    color: white;
 }
 .form_holder input{
     font-size: .9rem;
-    height: 1.6rem;
-    border: 1px solid wheat;
+    height: 1.7rem;
+    border: none;
 }
 
 .form_holder input:focus{
-    border-color: grey
+    border-color: none
 }
 
 .form_holder input:invalid{

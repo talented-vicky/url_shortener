@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express')
 
 const shortCtrl = require('../controllers/shortener')
 

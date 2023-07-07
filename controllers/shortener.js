@@ -22,45 +22,42 @@ exports.postUrl = async (req, res) => {
     // create url if short Url doesn't exist and long url exist
     if(validUrl.isUri(longUrl) && !shortUrl) {
         try {
-            let scissors = await Shortener.findOne({ longUrl })
-            if(scissors) {
-                res.json(scissors)
-                console.log(scissors)
+            let shortener = await Shortener.findOne({ longUrl })
+            if(shortener) {
+                res.json(shortener)
             } else {
                 let urlCode = shortId.generate();
                 const shortUrl = baseUrl + '/' + urlCode;
                 const { visits, visitsFB, visitsYT, visitsIG, visitsTW } = 0
 
-                scissors = new Shortener({
+                shortener = new Shortener({
                     longUrl, shortUrl, urlCode, visits, visitsFB,
                     visitsYT, visitsIG, visitsTW, date: new Date()
                 });
 
-                await scissors.save();
-                res.status(200).json(scissors);
+                await shortener.save();
+                res.status(200).json(shortener);
             }
         } catch (error) {
-            console.error(error);
             res.status(500).json('Server Error');
         }
     } else if(validUrl.isUri(longUrl) && shortUrl ) {
         try {
-            let scissors = await Shortener.findOne({ longUrl })
-            if(scissors) {
-                res.json(scissors)
+            let shortener = await Shortener.findOne({ longUrl })
+            if(shortener) {
+                res.json(shortener)
             } else {
                 let urlCode = shortUrl;
                 const shortUrl = baseUrl + '/' + urlCode;
-                scissors = new Shortener({
+                shortener = new Shortener({
                     longUrl, shortUrl, urlCode, visits, visitsFB, 
                     visitsYT, visitsIG, visitsTW, date: new Date()
                 });
 
-                await scissors.save();
-                res.status(200).json(scissors);
+                await shortener.save();
+                res.status(200).json(shortener);
             }
         } catch (error) {
-            console.error(error);
             res.status(500).json('Server Error');
         }
         
@@ -71,9 +68,13 @@ exports.postUrl = async (req, res) => {
 
 //GET ROUTE SENDS US TO http://localhost:5000/paramsUrl
 exports.getShortened = async (req, res) => {
-    if (req.params.shortUrl != undefined) {
-        var data = await Scissors.findOne({ urlCode: req.params.shortUrl });
-        console.log(data)
+    if (req.params.shortUrl == undefined) {
+        error = new Error("ShortUrl not defined")
+        error.statusCode = 500
+        throw error
+    }
+    try {
+        var data = await Shortener.findOne({ urlCode: req.params.shortUrl });
         if (data) {
             data.visits = data.visits + 1;
             var ref = req.query.ref;
@@ -92,12 +93,11 @@ exports.getShortened = async (req, res) => {
                         data.visitsTW = data.visitsTW + 1;
                         break;   
                 }
-                
             }
             await data.save();
             res.redirect(data.longUrl);
-        }
-    } else {
-        console.log(error)
-    }
+        }   
+    } catch (error) {
+        res.status(500).json('Server Error');
+    } 
 }

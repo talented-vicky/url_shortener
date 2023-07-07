@@ -6,15 +6,17 @@ body {
 
 /* button */
 .btn {
-    background-color: rgb(38, 192, 141);
+    background-color: rgb(27, 7, 202);
     border-radius: .8rem;
     padding: .5rem 1.2rem;
+    font-size: 1.1rem;
     margin-top: .5rem;
     color: white;
-    border: 1px solid rgb(38, 192, 141);
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid rgb(77, 24, 24);
 }
 .btn:hover,
 .btn:active {
-    color: rgb(38, 192, 141);
+    color: rgb(14, 2, 131);
     background-color: white
 }

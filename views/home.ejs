@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/public/">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <main>
         <form class="form" action="/shorten" method="post">
-            <div class="form_holder">
-                <label for="shorturl"> Enter short url</label>
-                <input type="text" name="shorturl">
-            </div>
+            <h2 class="header"> Welcome to Url Generator </h2>
             <div class="form_holder">
                 <label for="longurl"> Enter long url</label>
                 <input type="text" name="longurl">
             </div>
-            <button class="btn" type="submit"> Get url </button>
+            <div class="form_holder">
+                <label for="shorturl"> Enter short url</label>
+                <input type="text" name="shorturl">
+            </div>
+            <button class="btn" type="submit"> Generate url </button>
         </form>
     </main>
     
