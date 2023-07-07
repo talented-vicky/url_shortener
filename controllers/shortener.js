@@ -3,6 +3,14 @@ const shortId = require('shortid')
 
 const Shortener = require('../models/shortener')
 
+const dotenv = require('dotenv')
+dotenv.config();
+
+const initUrl = process.env.baseurl
+const port = process.env.port
+const baseUrl = `${initUrl}${port}/`
+
+
 exports.getHome = async (req, res) => {
     res.render('home', {
         title: 'Return Page',
@@ -14,7 +22,6 @@ exports.postUrl = async (req, res) => {
     const { longUrl, shortUrl } = req.body;
 
     //check if baseurl is valid
-    const baseUrl = process.env.BASEURL
     if(!validUrl.isUri(baseUrl)) {
         return res.status(401).json('Invalid Base Url')
     }
